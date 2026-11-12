@@ -90,11 +90,21 @@ window.WILLIAN = {
       ]
     },
     {
-      id: 'hermano4', from: 'bro3', to: 'bro-out',
+      id: 'hermano4', from: 'bro3', to: 'bro-back',
       kicker: 'El cuarto de tu hermano',
       title: 'Las llaves',
       text: 'Ya son casi 3 años desde que me regresé a Venezuela y nos dimos el último abrazo, pero los kilómetros nunca han cambiado nuestro código. Aunque hoy no estemos jugando en la misma cancha ni viviendo puerta con puerta como en aquellos tiempos en Chile, quiero que cada vez que agarres estas llaves recuerdes que aquí tienes a tu hermano menor cuidando lo tuyo, celebrando tus triunfos y deseando que sigas creciendo sin techo. Sigue disfrutando de tu casa, de tu familia y de todo lo que te has ganado a pulso. En las buenas y en las malas, sabes que siempre cuentas conmigo.',
       sign: '— Tu hermano'
+    },
+    {
+      id: 'hermano5', from: 'bro-back', to: 'bro-out',
+      kicker: 'El cuarto de tu hermano',
+      title: 'Mi canción',
+      text: 'Esta es la canción que elegí para ti.',
+      sign: '— Tu hermano',
+      songs: [
+        { label: 'Canción de tu hermano', url: 'https://youtu.be/ikYBjeUDctE' }
+      ]
     },
     {
       id: 'mama1', from: 'mama-door', to: 'mama2',
