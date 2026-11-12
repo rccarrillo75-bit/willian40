@@ -230,9 +230,9 @@ box(-1.3, 1.1, 1.7, 0.07, 0.05, 15.4, mRail); box(-1.3, 0.08, 1.7, 0.05, 0.05, 1
   s.position.set(-0.4, 1.5, 9.36); s.rotation.y = Math.PI; scene.add(s);
   box(-0.4, 1.5, 9.375, 0.68, 0.42, 0.03, mWood);
   /* puerta del vecino: reja marrón y puerta blanca, a la derecha del letrero */
-  box(-1.0, 1.0, 9.38, 0.48, 2.0, 0.04, mWhite);
-  for (var gi = 0; gi < 7; gi++) box(-1.2 + gi * 0.065, 1.0, 9.34, 0.02, 2.0, 0.02, L(0x5b3a25));
-  box(-1.0, 1.98, 9.34, 0.48, 0.04, 0.03, L(0x5b3a25)); box(-1.0, 1.0, 9.34, 0.48, 0.03, 0.03, L(0x5b3a25));
+  box(-1.0, 1.0, 9.38, 0.5, 2.0, 0.04, mWood);
+  for (var gi = 0; gi < 7; gi++) box(-1.22 + gi * 0.07, 1.0, 9.33, 0.02, 2.0, 0.02, mGold);
+  box(-1.0, 1.98, 9.33, 0.5, 0.04, 0.03, mGold); box(-1.0, 1.0, 9.33, 0.5, 0.03, 0.03, mGold); box(-1.25, 1.0, 9.33, 0.03, 2.0, 0.03, mGold); box(-0.75, 1.0, 9.33, 0.03, 2.0, 0.03, mGold);
 })();
 /* entorno: árboles, carros, edificio de enfrente */
 var ground = new THREE.Mesh(new THREE.PlaneGeometry(60, 60), L(0x8a8f86)); ground.rotation.x = -Math.PI / 2; ground.position.set(-22, -7.5, 4); scene.add(ground);
@@ -312,6 +312,7 @@ function leaf(x, y, z, w, h, rotY, mat) { var g = new THREE.Group(); g.position.
 function frameX(x, z0, z1, h, m) { m = m || mDark; box(x, h / 2, z0 - 0.04, 0.14, h, 0.06, m); box(x, h / 2, z1 + 0.04, 0.14, h, 0.06, m); box(x, h + 0.03, (z0 + z1) / 2, 0.14, 0.06, z1 - z0 + 0.14, m); }
 frameX(4.45, 3.6, 4.5, DH);
 frameX(-0.02, 8.0, 9.0, DH, mDarkW);
+box(0, H / 2, 7.93, 0.3, H, 0.14, mYel); box(0, H / 2, 9.07, 0.3, H, 0.14, mYel); box(0, (H + DH) / 2, 8.5, 0.3, H - DH, 1.14, mYel);
 leaf(4.38, 0, 3.6, 0.9, 2.0, Math.PI / 2, mWhite);
 frameX(3.12, 3.4, 4.3, DH); /* baño sin puerta */
 /* puerta de Raúl: blanca con escudo de Argentina, abierta hacia adentro */
