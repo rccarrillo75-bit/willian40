@@ -499,8 +499,12 @@ addFrame('fotos/papa4.jpg', '', '', 5.6, 1.5, 2.17, 0, 0.9, 498 / 664);
   box(1.95, 1.0, 2.75, 0.3, 2.0, 0.5, L(0x4a2c1c));                           /* clóset pequeño de madera, detrás */
 
 })();
-addFrame(null, 'Foto de tu hermano', 'llegará aquí', 0.14, 1.45, 1.55, Math.PI / 2, 0.85, 0.75);
-addFrame(null, 'Su canción', 'llegará aquí', 0.14, 1.45, 2.45, Math.PI / 2, 0.85, 0.75);
+addFrame('fotos/hermano1.jpg', '', '', 0.14, 1.15, 1.15, Math.PI / 2, 0.4, 0.992);
+addFrame('fotos/hermano2.jpg', '', '', 0.14, 1.15, 1.85, Math.PI / 2, 0.4, 1.000);
+addFrame('fotos/hermano3.jpg', '', '', 0.14, 1.15, 2.55, Math.PI / 2, 0.4, 0.751);
+addFrame('fotos/hermano4.jpg', '', '', 0.14, 1.7, 1.15, Math.PI / 2, 0.4, 1.301);
+addFrame('fotos/hermano5.jpg', '', '', 0.14, 1.7, 1.85, Math.PI / 2, 0.4, 0.750);
+addFrame('fotos/hermano6.jpg', '', '', 0.14, 1.7, 2.55, Math.PI / 2, 0.4, 1.023);
 /* ----- cuarto de mamá ----- */
 (function () {
   box(3.65, 1.05, 1.3, 1.0, 2.1, 0.1, L(0xeeeadc));                           /* paredita-clóset */
@@ -561,15 +565,15 @@ var KF = [
   ['papa-out', 4.45, 1.65, 4.05, 270, 0, 3],
   ['corr2', 3.8, 1.65, 3.8, 360, 0, 1.8],
   ['bro-pre', 3.8, 1.65, 2.7, 270, 0, 1.5],
-  ['bro-door', 3.12, 1.65, 2.7, 270, 0, 1.3],
-  ['bro-in', 2.85, 1.65, 2.5, 300, 0, 1.5],
-  ['bro-r', 2.75, 1.6, 1.4, 360, 0, 1.6],
-  ['bro1', 1.8, 1.55, 1.2, 270, 0, 3],
-  ['bro2', 1.8, 1.55, 1.2, 360, 0, 3],
-  ['bro3', 1.8, 1.55, 1.2, 395, 0, 3],
-  ['bro-back', 2.8, 1.6, 1.3, 450, 0, 2],
-  ['bro-door2', 2.85, 1.65, 2.5, 450, 0, 1.5],
-  ['bro-out', 3.5, 1.65, 2.7, 450, 0, 1.5],
+  ['bro-door', 3.12, 1.65, 2.7, 270, 0, 2],
+  ['bro-in', 2.85, 1.65, 2.5, 300, 0, 2.6],
+  ['bro-r', 2.75, 1.6, 1.4, 335, 0, 2.6],
+  ['bro1', 1.8, 1.55, 1.2, 285, 0, 4.5],
+  ['bro2', 1.8, 1.55, 1.2, 345, 0, 4.5],
+  ['bro3', 1.8, 1.55, 1.2, 395, 0, 4.5],
+  ['bro-back', 2.8, 1.6, 1.3, 450, 0, 3],
+  ['bro-door2', 2.85, 1.65, 2.5, 450, 0, 2.6],
+  ['bro-out', 3.5, 1.65, 2.7, 450, 0, 2.6],
   ['corr3', 3.8, 1.65, 2.5, 360, 0, 1.2],
   ['mama-door', 3.8, 1.65, 2.1, 360, 0, 1.2],
   ['mama0', 3.8, 1.65, 1.85, 360, 0, 2.5],
@@ -661,7 +665,7 @@ var target = 0, cur = 0, progEl = document.getElementById('prog');
 function readScroll() { target = Math.max(0, Math.min(1, window.scrollY / maxScroll)); }
 window.addEventListener('scroll', readScroll, { passive: true }); readScroll();
 function frame() {
-  cur += (target - cur) * 0.085;
+  cur += (target - cur) * 0.06;
   if (Math.abs(target - cur) < 0.00005) cur = target;
   var s = posAt(cur);
   camera.position.set(s.x, s.y, s.z);

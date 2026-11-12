@@ -61,11 +61,40 @@ window.WILLIAN = {
       ]
     },
     {
-      id: 'hermano', from: 'bro-door', to: 'bro-out',
+      id: 'hermano1', from: 'bro-door', to: 'bro1',
       kicker: 'El cuarto de tu hermano',
-      title: 'Mi cuarto',
-      text: 'Aquí llegará el mensaje de tu hermano, su foto y su canción.',
-      pending: true
+      title: 'Williii, ¡felices 40!',
+      text: '¡Williii, felices 40 años, hermano! Al verte llegar al cuarto piso es imposible no mirar atrás y agradecer por todo el camino que hemos recorrido como compañeros de vida. Se me vienen a la mente nuestros años de juventud, cuando armábamos aquellos equipos familiares para ir a competir a los barrios y urbanizaciones —quedando campeones en unas cuantas canchas y disfrutando cada partido al máximo—, o cuando compartíamos la fiebre por el Barça (aunque yo ya me haya retirado de ver fútbol y tú sigas firme con esa pasión).',
+      sign: '— Tu hermano'
+    },
+    {
+      id: 'hermano2', from: 'bro1', to: 'bro2',
+      kicker: 'El cuarto de tu hermano',
+      title: 'Compañeros de vida',
+      text: 'Tampoco olvido cuando soñábamos con estudiar deporte en la universidad, ni mucho menos nuestros años trabajando en la construcción; gracias a ese esfuerzo junto a ti pude pagarme la carrera y graduarme. Aunque me llevas 5 años y, con el tiempo, cada uno tomó su propio rumbo —tú con tu energía y tu empuje, y yo buscando un camino más espiritual—, nuestra forma de ser hermanos siempre ha sido la más genuina: velar porque el otro esté bien, sin importar dónde estemos.',
+      sign: '— Tu hermano'
+    },
+    {
+      id: 'hermano3', from: 'bro2', to: 'bro3',
+      kicker: 'El cuarto de tu hermano',
+      title: 'Lo que admiro de ti',
+      text: 'Si algo te reconozco y admiro profundamente hoy, a tus 40, es tu capacidad impresionante para crecer. Eres de los que, a donde llega, echa raíces fuertes y levanta su mundo a punta de temple. Me da una alegría inmensa saber que, después de tanto trajinar en Chile, desde aquellos días en que te recibí en casa y luego fuimos vecinos, hoy tienes tu propio hogar allá. Y aquí en Venezuela, mientras vivo en tu casa y te la cuido, veo todos los días el fruto de tu constancia. Te admiro mucho, Willi.',
+      sign: '— Tu hermano',
+      photos: [
+        { src: 'fotos/hermano1.jpg', cap: 'Foto elegida por tu hermano' },
+        { src: 'fotos/hermano2.jpg', cap: 'Foto elegida por tu hermano' },
+        { src: 'fotos/hermano3.jpg', cap: 'Foto elegida por tu hermano' },
+        { src: 'fotos/hermano4.jpg', cap: 'Foto elegida por tu hermano' },
+        { src: 'fotos/hermano5.jpg', cap: 'Foto elegida por tu hermano' },
+        { src: 'fotos/hermano6.jpg', cap: 'Foto elegida por tu hermano' }
+      ]
+    },
+    {
+      id: 'hermano4', from: 'bro3', to: 'bro-out',
+      kicker: 'El cuarto de tu hermano',
+      title: 'Las llaves',
+      text: 'Ya son casi 3 años desde que me regresé a Venezuela y nos dimos el último abrazo, pero los kilómetros nunca han cambiado nuestro código. Aunque hoy no estemos jugando en la misma cancha ni viviendo puerta con puerta como en aquellos tiempos en Chile, quiero que cada vez que agarres estas llaves recuerdes que aquí tienes a tu hermano menor cuidando lo tuyo, celebrando tus triunfos y deseando que sigas creciendo sin techo. Sigue disfrutando de tu casa, de tu familia y de todo lo que te has ganado a pulso. En las buenas y en las malas, sabes que siempre cuentas conmigo.',
+      sign: '— Tu hermano'
     },
     {
       id: 'mama1', from: 'mama-door', to: 'mama2',
