@@ -392,10 +392,10 @@ for (var qd = nd; qd < scene.children.length; qd++) scene.children[qd].position.
       g.fillStyle = '#ffd84a'; g.beginPath(); g.arc(w * .85, h * .15, 10, 0, 6.3); g.fill();
     });
   }
-  [3.85, 4.75].forEach(function (x) {
-    var f = new THREE.Group(); f.position.set(x, 1.6, 8.98); f.rotation.y = Math.PI; scene.add(f);
-    box(0, 0, 0, 0.72, 0.56, 0.03, mWood, f);
-    var p = new THREE.Mesh(new THREE.PlaneGeometry(0.64, 0.48), new THREE.MeshBasicMaterial({ map: rusticTex() })); p.position.z = 0.02; f.add(p);
+  [5.15, 5.85].forEach(function (x) {
+    var f = new THREE.Group(); f.position.set(x, 1.7, 4.78); f.rotation.y = 0; scene.add(f);
+    box(0, 0, 0, 0.5, 0.39, 0.03, mWood, f);
+    var p = new THREE.Mesh(new THREE.PlaneGeometry(0.44, 0.33), new THREE.MeshBasicMaterial({ map: rusticTex() })); p.position.z = 0.02; f.add(p);
   });
   /* aplique de pared cálido */
   box(7.6, 1.9, 5.9, 0.1, 0.18, 0.1, L(0xffe9b0)); pl(7.2, 1.9, 5.9, 0.3, 4);
