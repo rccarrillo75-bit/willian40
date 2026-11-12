@@ -213,8 +213,8 @@ cp.rotation.x = Math.PI / 2; cp.position.set(-0.65, H, 3.4); scene.add(cp);
 
 /* ---------- pared exterior (pasillo de afuera, amarilla) ---------- */
 /* hueco de la reja/puerta: z 8.0 a 9.0 */
-wallX(-0.1, -6, 9.4, [[7.95, 9.05, 0, H]], mYel, mYel, 0.06);
-wallX(0.06, 0, 7.95, [[0.4, 1.6, 1.9, 2.2]], mBone, mBone, 0.12);
+wallX(-0.1, -6, 9.4, [[0.4, 1.6, 1.9, 2.2], [3.5, 4.3, 1.5, 2.0], [5.4, 6.9, 1.2, 2.0], [7.95, 9.05, 0, H]], mYel, mYel, 0.06);
+wallX(0.06, 0, 7.95, [[0.4, 1.6, 1.9, 2.2], [3.5, 4.3, 1.5, 2.0], [5.4, 6.9, 1.2, 2.0]], mBone, mBone, 0.12);
 wallZ(9.42, -1.3, 0, [], mYel, mYel, 0.1);         /* pared del fondo del pasillo (el letrero) */
 wallZ(-6, -1.3, 0, [], mYel, mYel, 0.1);
 /* puertas de vecinos */
@@ -230,6 +230,15 @@ box(-1.3, 1.1, 1.7, 0.07, 0.05, 15.4, mRail); box(-1.3, 0.08, 1.7, 0.05, 0.05, 1
   s.position.set(-0.65, 1.5, 9.36); s.rotation.y = Math.PI; scene.add(s);
   box(-0.65, 1.5, 9.375, 1.18, 0.72, 0.03, mWood);
 })();
+/* ventanas del apartamento vistas desde el pasillo: cuarto de Raúl, baño y cocina, con rejitas doradas de tubo */
+[[0.4, 1.6, 1.9, 2.2], [3.5, 4.3, 1.5, 2.0], [5.4, 6.9, 1.2, 2.0]].forEach(function (w) {
+  var zc = (w[0] + w[1]) / 2, wd = w[1] - w[0], hh = w[3] - w[2], yc = (w[2] + w[3]) / 2;
+  var g = new THREE.Mesh(new THREE.PlaneGeometry(wd, hh), new THREE.MeshBasicMaterial({ color: 0xbcd9ea, transparent: true, opacity: 0.55, side: THREE.DoubleSide }));
+  g.position.set(-0.02, yc, zc); g.rotation.y = Math.PI / 2; scene.add(g);
+  var n = Math.round(wd / 0.12);
+  for (var k = 0; k <= n; k++) box(-0.15, yc, w[0] + k * wd / n, 0.025, hh, 0.025, mGold);
+  box(-0.15, w[2] + 0.01, zc, 0.03, 0.03, wd, mGold); box(-0.15, w[3] - 0.01, zc, 0.03, 0.03, wd, mGold); box(-0.15, yc, zc, 0.03, 0.03, wd, mGold);
+});
 /* entorno: árboles, carros, edificio de enfrente */
 var ground = new THREE.Mesh(new THREE.PlaneGeometry(60, 60), L(0x8a8f86)); ground.rotation.x = -Math.PI / 2; ground.position.set(-22, -7.5, 4); scene.add(ground);
 function tree(x, z, s, base) {
