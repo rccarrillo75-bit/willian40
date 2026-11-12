@@ -482,10 +482,7 @@ addFrame('fotos/papa4.jpg', '', '', 5.6, 1.5, 2.17, 0, 0.9, 498 / 664);
   [0x6a8fb8, 0xc45a3a, 0xe0c060, 0x4a7a5a].forEach(function (c, i) { box(2.62 + i * 0.07, 1.2, 0.3, 0.05, 0.22, 0.2, L(c)); });
   box(2.3, H / 2, 2.55, 0.12, H, 1.0, L(0xa9cfe6));                          /* paredita de concreto pintado frente a la puerta */
   box(1.95, 1.0, 2.55, 0.3, 2.0, 0.8, L(0x4a2c1c));                           /* clóset pequeño de madera, detrás */
-  [1.0, 1.3].forEach(function (x) {
-    box(x, 1.3, 2.74, 0.04, 0.04, 0.4, L(0xc8201e));                            /* barras paralelas rojas */
-    var d = box(x, 1.05, 2.72, 0.03, 0.03, 0.4, L(0x3a3a3a)); d.rotation.x = 0.7;  /* soporte diagonal */
-  });
+
 })();
 addFrame(null, 'Foto de tu hermano', 'llegará aquí', 0.14, 1.45, 1.55, Math.PI / 2, 0.85, 0.75);
 addFrame(null, 'Su canción', 'llegará aquí', 0.14, 1.45, 2.45, Math.PI / 2, 0.85, 0.75);
@@ -500,6 +497,12 @@ addFrame(null, 'Su canción', 'llegará aquí', 0.14, 1.45, 2.45, Math.PI / 2, 0
   box(6.5, 0.4, 1.9, 1.3, 0.8, 0.35, mDarkW); box(6.5, 1.2, 2.02, 1.0, 0.8, 0.04, L(0xcfe3ee)); /* peinadora con espejo */
   box(5.1, 0.75, 1.9, 0.8, 0.5, 0.4, L(0x2a2a30));                              /* televisor */
   box(5.85, 2.18, 1.9, 4.1, 0.06, 0.3, mTrim);                                  /* pestaña de cemento arriba */
+})();
+(function () { /* barras paralelas rojas junto a la ventana, pared del fondo del cuarto de mamá */
+  [1.45, 1.75].forEach(function (z) {
+    box(7.44, 1.3, z, 0.4, 0.04, 0.04, L(0xc8201e));
+    var d = box(7.46, 1.12, z, 0.34, 0.03, 0.03, L(0x3a3a3a)); d.rotation.z = -0.55;
+  });
 })();
 addFrame('fotos/mama1.jpg', '', '', 3.95, 1.6, 0.07, 0, 0.7, 1.091);
 addFrame('fotos/mama2.jpg', '', '', 4.7, 1.6, 0.07, 0, 0.7, 0.780);

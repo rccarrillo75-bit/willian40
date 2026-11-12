@@ -25,7 +25,7 @@ window.WILLIAN = {
       id: 'papa1', from: 'papa-door', to: 'papa1',
       kicker: 'El cuarto de Papá',
       title: 'Por tus 40 años',
-      text: 'Hola hijo Willy, te amo 💓💪 Hijo, hoy en tus 40 años, Dios mediante, te recuerdo como siempre: un gran hijo, muy educado, responsable. Un gran hijo y hermano, un buen tío, un buen esposo, un buen padre. Me siento muy orgulloso de ti, hijo. Mi amor hacia ti es inmenso. Siente un abrazo grande lleno de bendiciones. Te extraño mucho; aquí estaré siempre para ti, apoyándote siempre, estés donde estés, hijo querido. Te amo, hijo Willy.',
+      text: 'Hola hijo Willy, te amo 💓💪 Hijo, hoy en tus 40 años, Dios mediante, te recuerdo como siempre: un gran hijo, muy educado, responsable. Un gran hijo y hermano, un buen tío, un buen esposo, un buen padre. Me siento muy orgulloso de ti, hijo. Mi amor hacia ti es inmenso. Si alguna vez te fallé o hice cosas malas, te pido perdón; pero sobre todo, he dado lo mejor de mí. Siente un abrazo grande lleno de bendiciones. Te extraño mucho; aquí estaré siempre para ti, apoyándote siempre, estés donde estés, hijo querido. Te amo, hijo Willy.',
       sign: '— Tu papá'
     },
     {
