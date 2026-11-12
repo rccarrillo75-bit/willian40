@@ -68,14 +68,14 @@ window.WILLIAN = {
       pending: true
     },
     {
-      id: 'mama', from: 'mama-door', to: 'mama3',
+      id: 'mama', from: 'mama-door', to: 'mama4',
       kicker: 'El cuarto de Mamá',
       title: 'Mamá',
       text: 'Aquí llegará el mensaje de Mamá, su foto y su canción.',
       pending: true
     },
     {
-      id: 'cierre', from: 'mama3', to: 'end', last: true,
+      id: 'cierre', from: 'mama4', to: 'end', last: true,
       kicker: 'Con todo el amor de casa',
       title: 'Tu equipo titular',
       text: 'Willian, sabemos que son muchos años sin poder chocar las copas en la misma mesa ni darte el abrazo que tanto te debemos. Por eso quisimos que tus 40 años quedaran grabados en acero, para que cada vez que salgas de casa con tus llaves, nos lleves contigo. No importa la distancia ni el tiempo: somos tu equipo titular, tu barra incondicional y tu hogar. ¡Felices 40 años, te amamos con toda el alma!',
