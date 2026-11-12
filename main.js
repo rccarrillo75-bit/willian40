@@ -124,7 +124,7 @@ function bannerTex() { return null; }
 
 /* ---------- materiales ---------- */
 function L(c) { return new THREE.MeshLambertMaterial({ color: c }); }
-var mBone = L(0xe6dccb), mSal = L(0xeba48c), mYel = L(0xf4eec6), mSky = L(0x9fd0ee), mWhite = L(0xeeeae2), mWood = L(0x8a5a3c);
+var mBone = L(0xe6dccb), mSal = L(0xeba48c), mYel = L(0xfcf8e2), mSky = L(0x9fd0ee), mWhite = L(0xeeeae2), mWood = L(0x8a5a3c);
 var mDark = L(0x2e2420), mLight = L(0xd9a85c), mDarkW = L(0x4a2c1c), mTrim = L(0xfbf7ef), mGold = L(0xd9a93a);
 var mFloor = new THREE.MeshLambertMaterial({ map: floorTex });
 var mBrick = new THREE.MeshLambertMaterial({ map: brickTex });
@@ -207,13 +207,13 @@ pf.rotation.x = -Math.PI / 2; pf.position.set(-0.65, 0, 3.4); scene.add(pf);
 var ce = new THREE.Mesh(new THREE.PlaneGeometry(7.7, 9.1), mCeil);
 ce.rotation.x = Math.PI / 2; ce.position.set(3.85, H, 4.5); scene.add(ce);
 var cp = new THREE.Mesh(new THREE.PlaneGeometry(1.3, 16), new THREE.MeshLambertMaterial({ color: 0xf6f6f2, side: THREE.DoubleSide }));
-cp.rotation.x = Math.PI / 2; cp.position.set(-0.65, H + 0.3, 3.4); scene.add(cp);
+cp.rotation.x = Math.PI / 2; cp.position.set(-0.65, H, 3.4); scene.add(cp);
 /* piso del baño (azul) */
 (function () { var b = new THREE.Mesh(new THREE.PlaneGeometry(3.0, 1.6), L(0x6fa8d8)); b.rotation.x = -Math.PI / 2; b.position.set(1.5, 0.01, 3.85); scene.add(b); })();
 
 /* ---------- pared exterior (pasillo de afuera, amarilla) ---------- */
 /* hueco de la reja/puerta: z 8.0 a 9.0 */
-wallX(-0.1, -6, 9.4, [[7.95, 9.05]], mYel, mYel, 0.06);
+wallX(-0.1, -6, 9.4, [[7.95, 9.05, 0, H]], mYel, mYel, 0.06);
 wallX(0.06, 0, 7.95, [[0.4, 1.6, 1.9, 2.2]], mBone, mBone, 0.12);
 wallZ(9.42, -1.3, 0, [], mYel, mYel, 0.1);         /* pared del fondo del pasillo (el letrero) */
 wallZ(-6, -1.3, 0, [], mYel, mYel, 0.1);
@@ -226,9 +226,9 @@ box(-1.3, 1.1, 1.7, 0.07, 0.05, 15.4, mRail); box(-1.3, 0.08, 1.7, 0.05, 0.05, 1
 [-6, -3, 0, 3, 6, 9].forEach(function (zz) { cyl(-1.3, 1.4, zz, 0.035, 0.035, 2.8, mRail, 8); });
 /* letrero de bienvenida en el fondo del pasillo */
 (function () {
-  var s = new THREE.Mesh(new THREE.PlaneGeometry(0.62, 0.363), new THREE.MeshBasicMaterial({ map: signTex() }));
-  s.position.set(-0.4, 1.5, 9.36); s.rotation.y = Math.PI; scene.add(s);
-  box(-0.4, 1.5, 9.375, 0.68, 0.42, 0.03, mWood);
+  var s = new THREE.Mesh(new THREE.PlaneGeometry(1.1, 0.644), new THREE.MeshBasicMaterial({ map: signTex() }));
+  s.position.set(-0.65, 1.5, 9.36); s.rotation.y = Math.PI; scene.add(s);
+  box(-0.65, 1.5, 9.375, 1.18, 0.72, 0.03, mWood);
 })();
 /* entorno: árboles, carros, edificio de enfrente */
 var ground = new THREE.Mesh(new THREE.PlaneGeometry(60, 60), L(0x8a8f86)); ground.rotation.x = -Math.PI / 2; ground.position.set(-22, -7.5, 4); scene.add(ground);
@@ -382,6 +382,21 @@ for (var qd = nd; qd < scene.children.length; qd++) scene.children[qd].position.
     var f = new THREE.Group(); f.position.set(p[0], p[1], p[2]); f.rotation.y = Math.PI; scene.add(f);
     box(0, 0, 0, 0.5, 0.65, 0.03, mWhite, f); box(0, 0, 0.016, 0.42, 0.57, 0.01, mDark, f); box(0, -0.03, 0.025, 0.12, 0.35, 0.01, L(0xc8332e), f);
   });
+  function rusticTex() {
+    return ctex(200, 150, function (g, w, h) {
+      g.fillStyle = '#8fd0ee'; g.fillRect(0, 0, w, h); g.fillStyle = '#6fbf4a'; g.fillRect(0, h * .45, w, h * .55);
+      g.fillStyle = '#2f8fd8'; g.beginPath(); g.moveTo(w * .35, h); g.quadraticCurveTo(w * .6, h * .75, w * .45, h * .5); g.lineTo(w * .55, h * .5); g.quadraticCurveTo(w * .75, h * .75, w * .7, h); g.fill();
+      g.fillStyle = '#f2d36a'; g.fillRect(w * .1, h * .38, 44, 34); g.fillStyle = '#d2432e'; g.beginPath(); g.moveTo(w * .08, h * .38); g.lineTo(w * .1 + 22, h * .22); g.lineTo(w * .1 + 52, h * .38); g.fill();
+      g.fillStyle = '#7a4a2a'; g.fillRect(w * .1 + 17, h * .5, 10, 16);
+      [[.82, .5, '#e0603a'], [.72, .42, '#f2a62e'], [.9, .62, '#c8368a']].forEach(function (t) { g.fillStyle = '#6b4a2a'; g.fillRect(w * t[0] - 2, h * t[1], 4, 22); g.fillStyle = t[2]; g.beginPath(); g.arc(w * t[0], h * t[1], 14, 0, 6.3); g.fill(); });
+      g.fillStyle = '#ffd84a'; g.beginPath(); g.arc(w * .85, h * .15, 10, 0, 6.3); g.fill();
+    });
+  }
+  [3.85, 4.75].forEach(function (x) {
+    var f = new THREE.Group(); f.position.set(x, 1.6, 8.98); f.rotation.y = Math.PI; scene.add(f);
+    box(0, 0, 0, 0.72, 0.56, 0.03, mWood, f);
+    var p = new THREE.Mesh(new THREE.PlaneGeometry(0.64, 0.48), new THREE.MeshBasicMaterial({ map: rusticTex() })); p.position.z = 0.02; f.add(p);
+  });
   /* aplique de pared cálido */
   box(7.6, 1.9, 5.9, 0.1, 0.18, 0.1, L(0xffe9b0)); pl(7.2, 1.9, 5.9, 0.3, 4);
 })();
@@ -480,8 +495,8 @@ addFrame('fotos/papa4.jpg', '', '', 5.6, 1.5, 2.17, 0, 0.9, 498 / 664);
   box(2.75, 1.1, 0.3, 0.45, 0.05, 0.4, dk);                                   /* flotante marrón */
   box(2.75, 1.32, 0.32, 0.3, 0.3, 0.25, L(0x2a2a30));                          /* televisor antiguo */
   [0x6a8fb8, 0xc45a3a, 0xe0c060, 0x4a7a5a].forEach(function (c, i) { box(2.62 + i * 0.07, 1.2, 0.3, 0.05, 0.22, 0.2, L(c)); });
-  box(2.3, H / 2, 2.55, 0.12, H, 1.0, L(0xa9cfe6));                          /* paredita de concreto pintado frente a la puerta */
-  box(1.95, 1.0, 2.55, 0.3, 2.0, 0.8, L(0x4a2c1c));                           /* clóset pequeño de madera, detrás */
+  box(2.3, H / 2, 2.8, 0.12, H, 0.5, L(0xa9cfe6));                          /* paredita de concreto pintado frente a la puerta */
+  box(1.95, 1.0, 2.75, 0.3, 2.0, 0.5, L(0x4a2c1c));                           /* clóset pequeño de madera, detrás */
 
 })();
 addFrame(null, 'Foto de tu hermano', 'llegará aquí', 0.14, 1.45, 1.55, Math.PI / 2, 0.85, 0.75);
@@ -489,7 +504,7 @@ addFrame(null, 'Su canción', 'llegará aquí', 0.14, 1.45, 2.45, Math.PI / 2, 0
 /* ----- cuarto de mamá ----- */
 (function () {
   box(3.65, 1.05, 1.3, 1.0, 2.1, 0.1, L(0xeeeadc));                           /* paredita-clóset */
-  box(3.65, 1.0, 1.36, 0.8, 1.7, 0.02, L(0x4a2c1c));/* espejo de frente a la puerta */
+  box(3.65, 1.0, 1.36, 0.8, 1.7, 0.02, new THREE.MeshLambertMaterial({ color: 0xc4d0d8, emissive: 0x56626a }));/* espejo de frente a la puerta */
   box(5.7, 0.8, 0.8, 1.45, 0.4, 2.0, L(0xefe7d6));                             /* cama debajo de «Mamá» */
   box(5.7, 0.62, 0.7, 1.4, 0.2, 1.8, L(0xd9a0a0));
   box(7.3, 0.55, 0.45, 0.8, 0.1, 0.45, mDarkW);                                /* máquina de coser antigua */
