@@ -36,8 +36,8 @@ var floorTex = ctex(128, 128, function (g, w, h) {
   }
 }, [8, 12]);
 var concreteTex = ctex(128, 128, function (g, w, h) {
-  g.fillStyle = '#c9c1b6'; g.fillRect(0, 0, w, h);
-  for (var i = 0; i < 500; i++) { g.fillStyle = 'rgba(80,70,60,' + Math.random() * .12 + ')'; g.fillRect(Math.random() * w, Math.random() * h, 2, 2); }
+  g.fillStyle = '#9a9da1'; g.fillRect(0, 0, w, h);
+  for (var i = 0; i < 900; i++) { g.fillStyle = (i % 3 ? 'rgba(40,42,46,' : 'rgba(240,240,240,') + (0.15 + Math.random() * .4) + ')'; g.fillRect(Math.random() * w, Math.random() * h, 1 + Math.random() * 2, 1 + Math.random() * 2); }
   g.strokeStyle = 'rgba(70,60,50,.35)'; g.strokeRect(0, 0, w, h);
 }, [2, 10]);
 var brickTex = ctex(256, 256, function (g, w, h) {
@@ -124,7 +124,7 @@ function bannerTex() { return null; }
 
 /* ---------- materiales ---------- */
 function L(c) { return new THREE.MeshLambertMaterial({ color: c }); }
-var mBone = L(0xe6dccb), mSal = L(0xeba48c), mYel = L(0xe6c85a), mSky = L(0x9fd0ee), mWhite = L(0xeeeae2), mWood = L(0x8a5a3c);
+var mBone = L(0xe6dccb), mSal = L(0xeba48c), mYel = L(0xf4eec6), mSky = L(0x9fd0ee), mWhite = L(0xeeeae2), mWood = L(0x8a5a3c);
 var mDark = L(0x2e2420), mLight = L(0xd9a85c), mDarkW = L(0x4a2c1c), mTrim = L(0xfbf7ef), mGold = L(0xd9a93a);
 var mFloor = new THREE.MeshLambertMaterial({ map: floorTex });
 var mBrick = new THREE.MeshLambertMaterial({ map: brickTex });
@@ -206,7 +206,7 @@ var pf = new THREE.Mesh(new THREE.PlaneGeometry(1.3, 16), mConc);
 pf.rotation.x = -Math.PI / 2; pf.position.set(-0.65, 0, 3.4); scene.add(pf);
 var ce = new THREE.Mesh(new THREE.PlaneGeometry(7.7, 9.1), mCeil);
 ce.rotation.x = Math.PI / 2; ce.position.set(3.85, H, 4.5); scene.add(ce);
-var cp = new THREE.Mesh(new THREE.PlaneGeometry(1.3, 16), new THREE.MeshLambertMaterial({ color: 0xcfc8bd, side: THREE.DoubleSide }));
+var cp = new THREE.Mesh(new THREE.PlaneGeometry(1.3, 16), new THREE.MeshLambertMaterial({ color: 0xf6f6f2, side: THREE.DoubleSide }));
 cp.rotation.x = Math.PI / 2; cp.position.set(-0.65, H + 0.3, 3.4); scene.add(cp);
 /* piso del baño (azul) */
 (function () { var b = new THREE.Mesh(new THREE.PlaneGeometry(3.0, 1.6), L(0x6fa8d8)); b.rotation.x = -Math.PI / 2; b.position.set(1.5, 0.01, 3.85); scene.add(b); })();
@@ -220,13 +220,19 @@ wallZ(-6, -1.3, 0, [], mYel, mYel, 0.1);
 /* puertas de vecinos */
 [[-1.8], [-4.1]].forEach(function (p) { box(-0.14, 1.0, p[0], 0.03, 2.0, 0.85, mWhite); box(-0.155, 1.0, p[0] + 0.5, 0.01, 2.0, 0.06, mDark); });
 /* baranda de hierro a la derecha, altura de codo */
-for (var bi = 0; bi < 34; bi++) box(-1.3, 0.55, -6 + bi * 0.45, 0.03, 1.1, 0.03, mDark);
-box(-1.3, 1.1, 1.7, 0.07, 0.05, 15.4, mDark); box(-1.3, 0.08, 1.7, 0.05, 0.05, 15.4, mDark);
+var mRail = L(0x5b3a25);
+for (var bi = 0; bi < 34; bi++) box(-1.3, 0.55, -6 + bi * 0.45, 0.03, 1.1, 0.03, mRail);
+box(-1.3, 1.1, 1.7, 0.07, 0.05, 15.4, mRail); box(-1.3, 0.08, 1.7, 0.05, 0.05, 15.4, mRail);
+[-6, -3, 0, 3, 6, 9].forEach(function (zz) { cyl(-1.3, 1.4, zz, 0.035, 0.035, 2.8, mRail, 8); });
 /* letrero de bienvenida en el fondo del pasillo */
 (function () {
-  var s = new THREE.Mesh(new THREE.PlaneGeometry(1.0, 0.585), new THREE.MeshBasicMaterial({ map: signTex() }));
-  s.position.set(-0.65, 1.5, 9.36); s.rotation.y = Math.PI; scene.add(s);
-  box(-0.65, 1.5, 9.375, 1.08, 0.66, 0.03, mWood);
+  var s = new THREE.Mesh(new THREE.PlaneGeometry(0.62, 0.363), new THREE.MeshBasicMaterial({ map: signTex() }));
+  s.position.set(-0.4, 1.5, 9.36); s.rotation.y = Math.PI; scene.add(s);
+  box(-0.4, 1.5, 9.375, 0.68, 0.42, 0.03, mWood);
+  /* puerta del vecino: reja marrón y puerta blanca, a la derecha del letrero */
+  box(-1.0, 1.0, 9.38, 0.48, 2.0, 0.04, mWhite);
+  for (var gi = 0; gi < 7; gi++) box(-1.2 + gi * 0.065, 1.0, 9.34, 0.02, 2.0, 0.02, L(0x5b3a25));
+  box(-1.0, 1.98, 9.34, 0.48, 0.04, 0.03, L(0x5b3a25)); box(-1.0, 1.0, 9.34, 0.48, 0.03, 0.03, L(0x5b3a25));
 })();
 /* entorno: árboles, carros, edificio de enfrente */
 var ground = new THREE.Mesh(new THREE.PlaneGeometry(60, 60), L(0x8a8f86)); ground.rotation.x = -Math.PI / 2; ground.position.set(-22, -7.5, 4); scene.add(ground);
@@ -241,9 +247,9 @@ for (var wr = 0; wr < 3; wr++) for (var wc = 0; wc < 9; wc++) box(-25.7, -4 + wr
 
 /* ---------- planta del apartamento ---------- */
 /* envolvente */
-wallX(7.7, 0, 9.05, [[3.0, 4.2, 0.9, 2.05], [0.3, 1.3, 0.9, 2.05]], mBone, mBone);
+wallX(7.7, 0, 9.05, [[3.0, 4.2, 0.9, 2.05], [0.3, 1.3, 0.9, 2.05], [6.5, 8.3, 0.9, 2.05]], mBone, mBone);
 wallZ(0, 0, 7.7, [], mBone, mBone);
-wallZ(9.05, 0, 7.7, [[5.1, 7.3, 0.9, 2.05]], mSal, mSal);   /* pared salmón de la derecha, con ventana ancha */
+wallZ(9.05, 0, 7.7, [], mSal, mSal);   /* pared salmón de la derecha, con ventana ancha */
 /* pasillito de entrada (1,10 m) */
 wallZ(7.95, 0, 1.3, [], mBone, mBone);
 wallZ(9.05, 0, 1.3, [], mBone, mBone);
@@ -290,9 +296,8 @@ function glass(x, y, z, w, h, rotY) { var g = new THREE.Mesh(new THREE.PlaneGeom
 glass(0.125, 2.05, 1.0, 1.2, 0.3, Math.PI / 2);
 glass(7.6, 1.5, 3.6, 1.2, 1.15, -Math.PI / 2);
 glass(7.6, 1.5, 0.8, 1.0, 1.15, -Math.PI / 2);
-glass(6.2, 1.5, 9.0, 2.2, 1.15, Math.PI);
-for (var rj = 0; rj < 8; rj++) box(5.2 + rj * 0.28, 1.5, 9.18, 0.025, 1.1, 0.025, mDark);
-box(6.2, 1.0, 9.3, 2.4, 0.04, 0.5, mDark);
+glass(7.6, 1.5, 7.4, 1.8, 1.15, -Math.PI / 2);
+for (var rj = 0; rj < 7; rj++) box(7.78, 1.5, 6.55 + rj * 0.28, 0.025, 1.1, 0.025, mDark);
 
 /* ---------- puertas ---------- */
 function leaf(x, y, z, w, h, rotY, mat) { var g = new THREE.Group(); g.position.set(x, 0, z); g.rotation.y = rotY; scene.add(g); box(w / 2, h / 2, 0, w, h, 0.05, mat, g); return g; }
@@ -304,15 +309,16 @@ function leaf(x, y, z, w, h, rotY, mat) { var g = new THREE.Group(); g.position.
   leaf(0.16, 0, 8.98, 0.98, 2.0, -Math.PI / 2 + 0.1, mWhite);
 })();
 /* marcos negros */
-function frameX(x, z0, z1, h) { box(x, h / 2, z0 - 0.04, 0.14, h, 0.06, mDark); box(x, h / 2, z1 + 0.04, 0.14, h, 0.06, mDark); box(x, h + 0.03, (z0 + z1) / 2, 0.14, 0.06, z1 - z0 + 0.14, mDark); }
+function frameX(x, z0, z1, h, m) { m = m || mDark; box(x, h / 2, z0 - 0.04, 0.14, h, 0.06, m); box(x, h / 2, z1 + 0.04, 0.14, h, 0.06, m); box(x, h + 0.03, (z0 + z1) / 2, 0.14, 0.06, z1 - z0 + 0.14, m); }
 frameX(4.45, 3.6, 4.5, DH);
+frameX(-0.02, 8.0, 9.0, DH, mDarkW);
 leaf(4.38, 0, 3.6, 0.9, 2.0, Math.PI / 2, mWhite);
 frameX(3.12, 3.4, 4.3, DH); /* baño sin puerta */
 /* puerta de Raúl: blanca con escudo de Argentina, abierta hacia adentro */
 (function () {
   frameX(3.12, 2.35, 3.05, DH);
-  var g = new THREE.Group(); g.position.set(3.1, 0, 2.35); g.rotation.y = Math.PI; scene.add(g);
-  var m = box(0.35, 1.0, 0, 0.7, 2.0, 0.05, [mWhite, mWhite, mWhite, mWhite, mWhite, new THREE.MeshLambertMaterial({ map: argShieldTex() })], g);
+  var g = new THREE.Group(); g.position.set(3.1, 0, 3.0); g.rotation.y = Math.PI; scene.add(g);
+  var m = box(0.35, 1.0, 0, 0.7, 2.0, 0.05, [mWhite, mWhite, mWhite, mWhite, new THREE.MeshLambertMaterial({ map: argShieldTex() }), mWhite], g);
 })();
 /* puerta de mamá: papel tapiz de laguna oscura */
 (function () {
@@ -359,24 +365,24 @@ chair(5.6, 5.45, 0); chair(5.6, 6.75, Math.PI); chair(4.8, 6.1, Math.PI / 2); ch
   armchair(5.4, 7.7, Math.PI / 2); armchair(7.1, 7.7, -Math.PI / 2);
   glassTable(6.3, 7.85, 0.8, 0.6, 0.9);
   /* cortinas ámbar y visillo blanco */
-  box(5.05, 1.4, 8.93, 0.5, 1.9, 0.08, L(0x9a6a2a)); box(7.45, 1.4, 8.93, 0.5, 1.9, 0.08, L(0x9a6a2a));
-  var sh = new THREE.Mesh(new THREE.PlaneGeometry(2.0, 1.8), new THREE.MeshBasicMaterial({ color: 0xf2f2ee, transparent: true, opacity: 0.5, side: THREE.DoubleSide })); sh.position.set(6.25, 1.4, 8.9); sh.rotation.y = Math.PI; scene.add(sh);
+  box(7.58, 1.4, 6.42, 0.1, 1.9, 0.5, L(0x9a6a2a)); box(7.58, 1.4, 8.4, 0.1, 1.9, 0.5, L(0x9a6a2a));
+  var sh = new THREE.Mesh(new THREE.PlaneGeometry(1.9, 1.8), new THREE.MeshBasicMaterial({ color: 0xf2f2ee, transparent: true, opacity: 0.5, side: THREE.DoubleSide })); sh.position.set(7.56, 1.4, 7.4); sh.rotation.y = Math.PI / 2; scene.add(sh);
   /* cuadros negros con figura roja junto a la chimenea */
-  [[7.62, 1.55, 8.4], [7.62, 1.55, 7.55]].forEach(function (p) {
-    var f = new THREE.Group(); f.position.set(p[0], p[1], p[2]); f.rotation.y = -Math.PI / 2; scene.add(f);
+  [[5.7, 1.65, 8.98], [6.55, 1.65, 8.98]].forEach(function (p) {
+    var f = new THREE.Group(); f.position.set(p[0], p[1], p[2]); f.rotation.y = Math.PI; scene.add(f);
     box(0, 0, 0, 0.5, 0.65, 0.03, mWhite, f); box(0, 0, 0.016, 0.42, 0.57, 0.01, mDark, f); box(0, -0.03, 0.025, 0.12, 0.35, 0.01, L(0xc8332e), f);
   });
   /* aplique de pared cálido */
-  box(7.6, 1.9, 6.3, 0.1, 0.18, 0.1, L(0xffe9b0)); pl(7.2, 1.9, 6.3, 0.3, 4);
+  box(7.6, 1.9, 5.9, 0.1, 0.18, 0.1, L(0xffe9b0)); pl(7.2, 1.9, 5.9, 0.3, 4);
 })();
 /* chimenea semi-redonda de ladrillo en la esquina, con repisa tipo pozo y techito */
 (function () {
-  cyl(7.2, 0.55, 5.15, 0.62, 0.62, 1.1, mBrick, 20);
-  box(7.2, 0.35, 4.95, 0.5, 0.5, 0.2, mDark); box(7.2, 0.3, 4.98, 0.3, 0.2, 0.05, new THREE.MeshBasicMaterial({ color: 0xff7a2a }));
-  cyl(7.2, 1.2, 5.15, 0.68, 0.68, 0.08, mWood, 20);
-  cyl(7.2, 1.62, 5.15, 0.42, 0.45, 0.8, mBrick, 16);
-  box(7.2, 2.15, 5.15, 0.9, 0.08, 0.9, mWood); box(7.2, 2.25, 5.15, 0.6, 0.12, 0.6, mBrick);
-  box(7.5, 1.9, 5.35, 0.05, 0.5, 0.05, mWood); box(6.9, 1.9, 4.95, 0.05, 0.5, 0.05, mWood);
+  cyl(7.2, 0.55, 5.45, 0.58, 0.58, 1.1, mBrick, 20);
+  box(7.2, 0.35, 5.0, 0.5, 0.5, 0.2, mDark); box(7.2, 0.3, 5.03, 0.3, 0.2, 0.05, new THREE.MeshBasicMaterial({ color: 0xff7a2a }));
+  cyl(7.2, 1.2, 5.45, 0.62, 0.62, 0.08, mWood, 20);
+  cyl(7.2, 1.62, 5.45, 0.4, 0.43, 0.8, mBrick, 16);
+  box(7.2, 2.15, 5.45, 0.8, 0.08, 0.9, mWood); box(7.2, 2.25, 5.45, 0.55, 0.12, 0.55, mBrick);
+  box(7.5, 1.9, 5.65, 0.05, 0.5, 0.05, mWood); box(6.9, 1.9, 5.25, 0.05, 0.5, 0.05, mWood);
 })();
 /* pintura del atardecer en la pared de la cocina (a la izquierda al cruzar) */
 (function () {
@@ -405,7 +411,7 @@ cyl(3.7, H - 0.02, 3.4, 0.25, 0.25, 0.03, mTrim, 20);
 (function () {
   var st = new THREE.Shape();
   for (var i = 0; i < 10; i++) { var r = i % 2 ? 0.04 : 0.09, a = i * Math.PI / 5 - Math.PI / 2; st[i ? 'lineTo' : 'moveTo'](Math.cos(a) * r, Math.sin(a) * r); }
-  [0, 1, 2].forEach(function (i) { var m = new THREE.Mesh(new THREE.ShapeGeometry(st), new THREE.MeshBasicMaterial({ color: 0xd9a93a, side: THREE.DoubleSide })); m.position.set(7.62, 1.65, 6.7 + i * 0.26); m.rotation.y = -Math.PI / 2; scene.add(m); });
+  [0, 1, 2].forEach(function (i) { var m = new THREE.Mesh(new THREE.ShapeGeometry(st), new THREE.MeshBasicMaterial({ color: 0xd9a93a, side: THREE.DoubleSide })); m.position.set(7.62, 1.65, 6.0 + i * 0.16); m.rotation.y = -Math.PI / 2; scene.add(m); });
 })();
 
 /* ---------- marcos con fotos ---------- */
@@ -459,7 +465,7 @@ addFrame('fotos/papa4.jpg', '', '', 4.52, 1.5, 2.85, Math.PI / 2, 0.9, 498 / 664
   box(2.75, 1.1, 0.3, 0.45, 0.05, 0.4, dk);                                   /* flotante marrón */
   box(2.75, 1.32, 0.32, 0.3, 0.3, 0.25, L(0x2a2a30));                          /* televisor antiguo */
   [0x6a8fb8, 0xc45a3a, 0xe0c060, 0x4a7a5a].forEach(function (c, i) { box(2.62 + i * 0.07, 1.2, 0.3, 0.05, 0.22, 0.2, L(c)); });
-  box(1.25, 1.1, 2.88, 2.0, 2.1, 0.12, L(0x4a2c1c));                          /* clóset de madera oscura, cubierto por pared */
+  box(2.3, 1.15, 2.3, 0.5, 2.3, 1.4, L(0x4a2c1c));                          /* clóset de madera oscura, cubierto por pared */
 })();
 addFrame(null, 'Foto de tu hermano', 'llegará aquí', 0.14, 1.45, 1.55, Math.PI / 2, 0.85, 0.75);
 addFrame(null, 'Su canción', 'llegará aquí', 0.14, 1.45, 2.45, Math.PI / 2, 0.85, 0.75);
@@ -513,10 +519,14 @@ var KF = [
   ['corr2', 3.8, 1.65, 3.8, 360, 0, 1.8],
   ['bro-pre', 3.8, 1.65, 2.7, 270, 0, 1.5],
   ['bro-door', 3.12, 1.65, 2.7, 270, 0, 1.3],
-  ['bro1', 1.8, 1.55, 2.4, 270, 0, 3],
-  ['bro2', 1.8, 1.55, 2.4, 360, 0, 3],
-  ['bro3', 1.8, 1.55, 2.2, 395, 0, 3],
-  ['bro-out', 3.3, 1.65, 2.7, 450, 0, 2.5],
+  ['bro-in', 2.85, 1.65, 2.5, 300, 0, 1.5],
+  ['bro-r', 2.75, 1.6, 1.4, 360, 0, 1.6],
+  ['bro1', 1.8, 1.55, 1.2, 270, 0, 3],
+  ['bro2', 1.8, 1.55, 1.2, 360, 0, 3],
+  ['bro3', 1.8, 1.55, 1.2, 395, 0, 3],
+  ['bro-back', 2.8, 1.6, 1.3, 450, 0, 2],
+  ['bro-door2', 2.85, 1.65, 2.5, 450, 0, 1.5],
+  ['bro-out', 3.5, 1.65, 2.7, 450, 0, 1.5],
   ['corr3', 3.8, 1.65, 2.5, 360, 0, 1.2],
   ['mama-door', 3.8, 1.65, 2.1, 360, 0, 1.2],
   ['mama0', 3.8, 1.65, 1.85, 360, 0, 2.5],
