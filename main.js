@@ -213,8 +213,8 @@ cp.rotation.x = Math.PI / 2; cp.position.set(-0.65, H + 0.3, 3.4); scene.add(cp)
 
 /* ---------- pared exterior (pasillo de afuera, amarilla) ---------- */
 /* hueco de la reja/puerta: z 8.0 a 9.0 */
-wallX(-0.1, -6, 9.4, [[8.0, 9.0]], mYel, mYel, 0.06);
-wallX(0.06, 0, 9.05, [[8.0, 9.0], [0.4, 1.6, 1.9, 2.2]], mBone, mBone, 0.12);
+wallX(-0.1, -6, 9.4, [[7.95, 9.05]], mYel, mYel, 0.06);
+wallX(0.06, 0, 7.95, [[0.4, 1.6, 1.9, 2.2]], mBone, mBone, 0.12);
 wallZ(9.42, -1.3, 0, [], mYel, mYel, 0.1);         /* pared del fondo del pasillo (el letrero) */
 wallZ(-6, -1.3, 0, [], mYel, mYel, 0.1);
 /* puertas de vecinos */
@@ -229,10 +229,6 @@ box(-1.3, 1.1, 1.7, 0.07, 0.05, 15.4, mRail); box(-1.3, 0.08, 1.7, 0.05, 0.05, 1
   var s = new THREE.Mesh(new THREE.PlaneGeometry(0.62, 0.363), new THREE.MeshBasicMaterial({ map: signTex() }));
   s.position.set(-0.4, 1.5, 9.36); s.rotation.y = Math.PI; scene.add(s);
   box(-0.4, 1.5, 9.375, 0.68, 0.42, 0.03, mWood);
-  /* puerta del vecino: reja marrón y puerta blanca, a la derecha del letrero */
-  box(-1.0, 1.0, 9.38, 0.5, 2.0, 0.04, mWood);
-  for (var gi = 0; gi < 7; gi++) box(-1.22 + gi * 0.07, 1.0, 9.33, 0.02, 2.0, 0.02, mGold);
-  box(-1.0, 1.98, 9.33, 0.5, 0.04, 0.03, mGold); box(-1.0, 1.0, 9.33, 0.5, 0.03, 0.03, mGold); box(-1.25, 1.0, 9.33, 0.03, 2.0, 0.03, mGold); box(-0.75, 1.0, 9.33, 0.03, 2.0, 0.03, mGold);
 })();
 /* entorno: árboles, carros, edificio de enfrente */
 var ground = new THREE.Mesh(new THREE.PlaneGeometry(60, 60), L(0x8a8f86)); ground.rotation.x = -Math.PI / 2; ground.position.set(-22, -7.5, 4); scene.add(ground);
@@ -249,11 +245,22 @@ for (var wr = 0; wr < 3; wr++) for (var wc = 0; wc < 9; wc++) box(-25.7, -4 + wr
 /* envolvente */
 wallX(7.7, 0, 9.05, [[3.0, 4.2, 0.9, 2.05], [0.3, 1.3, 0.9, 2.05], [6.5, 8.3, 0.9, 2.05]], mBone, mBone);
 wallZ(0, 0, 7.7, [], mBone, mBone);
-wallZ(9.05, 0, 7.7, [], mSal, mSal);   /* pared salmón de la derecha, con ventana ancha */
+wallZ(9.05, 3.12, 7.7, [], mSal, mSal);   /* pared salmón de la derecha, con ventana ancha */
+wallZ(9.05, 1.3, 3.12, [], mBone, mBone);
 /* pasillito de entrada (1,10 m) */
-wallZ(7.95, 0, 1.3, [], mBone, mBone);
-wallZ(9.05, 0, 1.3, [], mBone, mBone);
-archPanel('z', 1.3, 7.95, 9.05, 8.5, 0.9, mBone);         /* arco redondo: pasillito -> sala */
+wallZ(7.95, 0, 1.3, [], mBone, mYel);                      /* portal exterior (L): pared norte */
+wallZ(9.05, 0, 1.3, [], mYel, mBone);                      /* pared sur: puerta del vecino */
+wallX(1.3, 7.8, 9.05, [[8.0, 8.85]], mBone, mYel, 0.25);   /* ENTRADA CUADRADA con paredita de 25 cm */
+archPanel('z', 3.12, 7.8, 9.05, 8.43, 0.9, mBone);        /* arco redondo: fin de la pared del pasillito -> sala */
+(function () { var g = new THREE.Mesh(new THREE.PlaneGeometry(1.3, 1.1), mConc); g.rotation.x = -Math.PI / 2; g.position.set(0.65, 0.006, 8.5); scene.add(g); })();
+/* puerta del vecino (cerrada): reja dorada y puerta marrón, en la pared sur del portal */
+(function () {
+  box(0.65, 1.0, 8.97, 0.85, 2.0, 0.04, L(0x5a3a28));
+  box(0.65, 2.03, 8.97, 1.0, 0.06, 0.08, L(0x5a3a28)); box(0.17, 1.0, 8.97, 0.06, 2.0, 0.08, L(0x5a3a28)); box(1.13, 1.0, 8.97, 0.06, 2.0, 0.08, L(0x5a3a28));
+  for (var gi = 0; gi < 8; gi++) box(0.27 + gi * 0.1, 1.0, 8.92, 0.02, 1.96, 0.02, mGold);
+  box(0.65, 1.97, 8.92, 0.9, 0.04, 0.03, mGold); box(0.65, 0.04, 8.92, 0.9, 0.04, 0.03, mGold); box(0.65, 1.0, 8.92, 0.9, 0.03, 0.03, mGold);
+  box(0.65, 0.2, 8.92, 0.9, 0.03, 0.03, mGold); box(0.65, 1.7, 8.92, 0.9, 0.03, 0.03, mGold);
+})();
 /* cocina (blanca): pared sur con el cuadro, pared este con arco */
 wallZ(7.8, 1.3, 3.12, [], mBone, mWhite);
 wallZ(4.7, 0, 3.12, [], mWhite, mWhite);
@@ -301,19 +308,17 @@ for (var rj = 0; rj < 7; rj++) box(7.78, 1.5, 6.55 + rj * 0.28, 0.025, 1.1, 0.02
 
 /* ---------- puertas ---------- */
 function leaf(x, y, z, w, h, rotY, mat) { var g = new THREE.Group(); g.position.set(x, 0, z); g.rotation.y = rotY; scene.add(g); box(w / 2, h / 2, 0, w, h, 0.05, mat, g); return g; }
-/* reja dorada hacia afuera y puerta blanca hacia adentro */
+/* reja dorada hacia afuera (abierta, pegada a la pared norte del portal) y puerta blanca hacia adentro (abierta contra la pared de la cocina) */
 (function () {
-  var g = new THREE.Group(); g.position.set(-0.22, 0, 8.0); g.rotation.y = Math.PI / 2; scene.add(g);
-  for (var i = 0; i < 9; i++) box(i * 0.11 + 0.03, 1.0, 0, 0.03, 2.0, 0.03, mGold, g);
-  box(0.5, 0.05, 0, 1.0, 0.05, 0.04, mGold, g); box(0.5, 1.95, 0, 1.0, 0.05, 0.04, mGold, g); box(0.5, 1.0, 0, 1.0, 0.04, 0.04, mGold, g);
-  leaf(0.16, 0, 8.98, 0.98, 2.0, -Math.PI / 2 + 0.1, mWhite);
+  var g = new THREE.Group(); g.position.set(1.15, 0, 8.04); g.rotation.y = Math.PI; scene.add(g);
+  for (var i = 0; i < 8; i++) box(i * 0.105 + 0.03, 1.0, 0, 0.03, 2.0, 0.03, mGold, g);
+  box(0.4, 0.05, 0, 0.85, 0.05, 0.04, mGold, g); box(0.4, 1.95, 0, 0.85, 0.05, 0.04, mGold, g); box(0.4, 1.0, 0, 0.85, 0.04, 0.04, mGold, g);
+  leaf(1.43, 0, 7.93, 0.85, 2.0, 0, mWhite);
 })();
 /* marcos negros */
 function frameX(x, z0, z1, h, m) { m = m || mDark; box(x, h / 2, z0 - 0.04, 0.14, h, 0.06, m); box(x, h / 2, z1 + 0.04, 0.14, h, 0.06, m); box(x, h + 0.03, (z0 + z1) / 2, 0.14, 0.06, z1 - z0 + 0.14, m); }
 frameX(4.45, 3.6, 4.5, DH);
-frameX(-0.02, 8.0, 9.0, DH, mDarkW);
-box(0, H / 2, 7.93, 0.3, H, 0.14, mYel); box(0, H / 2, 9.07, 0.3, H, 0.14, mYel); box(0, (H + DH) / 2, 8.5, 0.3, H - DH, 1.14, mYel);
-leaf(4.38, 0, 3.6, 0.9, 2.0, Math.PI / 2, mWhite);
+leaf(4.5, 0, 4.6, 0.9, 2.0, 0, mWhite); /* puerta abierta contra la pared de la derecha */
 frameX(3.12, 3.4, 4.3, DH); /* baño sin puerta */
 /* puerta de Raúl: blanca con escudo de Argentina, abierta hacia adentro */
 (function () {
@@ -350,21 +355,25 @@ function chair(x, z, rotY) {
   [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(function (s) { box(s[0] * 0.18, 0.22, s[1] * 0.18, 0.04, 0.44, 0.04, mRattan, g); });
 }
 /* sala normal: mesa de ratán con vidrio y 4 sillas */
+var nd = scene.children.length;
 glassTable(5.6, 6.1, 1.3, 0.85, 0.75);
 chair(5.6, 5.45, 0); chair(5.6, 6.75, Math.PI); chair(4.8, 6.1, Math.PI / 2); chair(6.4, 6.1, -Math.PI / 2);
+for (var qd = nd; qd < scene.children.length; qd++) scene.children[qd].position.y += 0.18;
 /* sala alta: 2 escalones curvos de cerámica rojiza con filo dorado, sofá y sillones de ratán, mesa de vidrio */
 (function () {
-  function plat(x0, z0, x1, z1, rad, y, h) {
-    var sh = new THREE.Shape(); var w = x1 - x0, d = z1 - z0;
-    sh.moveTo(rad, 0); sh.lineTo(w, 0); sh.lineTo(w, d); sh.lineTo(rad, d); sh.absarc(rad, d - rad, rad, Math.PI / 2, Math.PI, false); sh.lineTo(0, rad); sh.absarc(rad, rad, rad, Math.PI, Math.PI * 1.5, false);
-    var g = new THREE.ExtrudeGeometry(sh, { depth: h, bevelEnabled: false, curveSegments: 12 });
+  function plat(x0, z0, x1, z1, rx, y, h) {
+    var w = x1 - x0, d = z1 - z0, sh = new THREE.Shape();
+    sh.moveTo(rx, d); sh.absellipse(rx, d / 2, rx, d / 2, Math.PI / 2, Math.PI * 1.5, false); sh.lineTo(w, 0); sh.lineTo(w, d); sh.lineTo(rx, d);
+    var g = new THREE.ExtrudeGeometry(sh, { depth: h, bevelEnabled: false, curveSegments: 24 });
     var m = new THREE.Mesh(g, mFloor); m.rotation.x = Math.PI / 2; m.position.set(x0, y + h, z0); scene.add(m);
   }
-  plat(4.7, 6.7, 7.7, 9.05, 0.6, 0, 0.18);
-  plat(5.2, 7.2, 7.7, 9.05, 0.5, 0.18, 0.18);
+  plat(4.15, 4.75, 7.7, 9.05, 0.55, 0, 0.18);
+  plat(4.85, 7.2, 7.7, 9.05, 0.45, 0.18, 0.18);
+  var n0 = scene.children.length;
   box(6.5, 0.6, 8.88, 1.9, 0.5, 0.2, mRattan); box(6.5, 0.95, 8.98, 1.9, 0.7, 0.1, mRattan); box(6.5, 0.5, 8.7, 1.8, 0.14, 0.5, mCush);  /* sofá de ratán bajo la ventana */
   armchair(5.4, 7.7, Math.PI / 2); armchair(7.1, 7.7, -Math.PI / 2);
   glassTable(6.3, 7.85, 0.8, 0.6, 0.9);
+  for (var q = n0; q < scene.children.length; q++) scene.children[q].position.y += 0.36;
   /* cortinas ámbar y visillo blanco */
   box(7.58, 1.4, 6.42, 0.1, 1.9, 0.5, L(0x9a6a2a)); box(7.58, 1.4, 8.4, 0.1, 1.9, 0.5, L(0x9a6a2a));
   var sh = new THREE.Mesh(new THREE.PlaneGeometry(1.9, 1.8), new THREE.MeshBasicMaterial({ color: 0xf2f2ee, transparent: true, opacity: 0.5, side: THREE.DoubleSide })); sh.position.set(7.56, 1.4, 7.4); sh.rotation.y = Math.PI / 2; scene.add(sh);
@@ -378,18 +387,20 @@ chair(5.6, 5.45, 0); chair(5.6, 6.75, Math.PI); chair(4.8, 6.1, Math.PI / 2); ch
 })();
 /* chimenea semi-redonda de ladrillo en la esquina, con repisa tipo pozo y techito */
 (function () {
+  var nc = scene.children.length;
   cyl(7.2, 0.55, 5.45, 0.58, 0.58, 1.1, mBrick, 20);
   box(7.2, 0.35, 5.0, 0.5, 0.5, 0.2, mDark); box(7.2, 0.3, 5.03, 0.3, 0.2, 0.05, new THREE.MeshBasicMaterial({ color: 0xff7a2a }));
   cyl(7.2, 1.2, 5.45, 0.62, 0.62, 0.08, mWood, 20);
   cyl(7.2, 1.62, 5.45, 0.4, 0.43, 0.8, mBrick, 16);
   box(7.2, 2.15, 5.45, 0.8, 0.08, 0.9, mWood); box(7.2, 2.25, 5.45, 0.55, 0.12, 0.55, mBrick);
   box(7.5, 1.9, 5.65, 0.05, 0.5, 0.05, mWood); box(6.9, 1.9, 5.25, 0.05, 0.5, 0.05, mWood);
+  for (var qc = nc; qc < scene.children.length; qc++) scene.children[qc].position.y += 0.18;
 })();
-/* pintura del atardecer en la pared de la cocina (a la izquierda al cruzar) */
+/* pintura del atardecer: en la pared de la entrada de la cocina (cara hacia la sala) */
 (function () {
-  var p = new THREE.Mesh(new THREE.PlaneGeometry(0.8, 0.56), new THREE.MeshBasicMaterial({ map: paintingTex() }));
-  p.position.set(2.6, 1.5, 7.89); p.rotation.y = 0; scene.add(p);
-  box(2.6, 1.5, 7.865, 0.9, 0.66, 0.03, mDark);
+  var p = new THREE.Mesh(new THREE.PlaneGeometry(0.55, 0.385), new THREE.MeshBasicMaterial({ map: paintingTex() }));
+  p.position.set(3.2, 1.5, 7.45); p.rotation.y = Math.PI / 2; scene.add(p);
+  box(3.19, 1.5, 7.45, 0.02, 0.45, 0.62, mDark);
 })();
 /* cocina blanca, apenas se asoma */
 box(0.5, 0.45, 5.2, 0.6, 0.9, 1.2, mWhite); box(0.5, 0.45, 6.6, 0.6, 0.9, 1.4, mWhite); box(0.4, 1.0, 5.2, 0.6, 2.0, 0.8, L(0xdcdcdc));
@@ -434,7 +445,8 @@ function bed(x, z, rotY, len, wid, cover, wood) {
 }
 /* ----- cuarto de papá ----- */
 var mPine = L(0xd9b35c);
-box(5.25, 1.0, 2.38, 1.4, 2.0, 0.5, mPine); box(5.25, 1.0, 2.62, 1.3, 1.9, 0.02, L(0xe6c677)); /* clóset de madera clarita (a la izquierda al entrar) */
+box(4.78, 1.0, 2.85, 0.5, 2.0, 1.3, mPine); box(5.04, 1.0, 2.85, 0.02, 1.9, 1.2, L(0xe6c677)); /* clóset en la pared de la puerta: solo se ve una esquina */
+box(4.52, 1.15, 3.52, 0.02, 0.12, 0.08, mTrim); box(4.52, 1.15, 3.52, 0.025, 0.05, 0.03, mDark); /* apagador */ /* clóset de madera clarita (a la izquierda al entrar) */
 bed(7.1, 3.55, Math.PI, 1.9, 1.3, 0xefe7d6, L(0xf2ead8));  /* cama blanco hueso al fondo, bajo la ventana (cabecera al este) */
 box(6.05, 0.3, 4.52, 0.9, 0.6, 0.4, mPine); box(6.05, 0.85, 4.55, 0.8, 0.5, 0.06, mDark); /* TV */
 /* cortina azul rey con soles */
@@ -448,16 +460,18 @@ box(7.6, 1.35, 2.7, 0.05, 1.7, 0.4, new THREE.MeshLambertMaterial({ map: curtain
 })();
 /* copa de Champions del Real Madrid en pedestal y bufanda en la pared */
 (function () {
+  var mSil = new THREE.MeshLambertMaterial({ color: 0xcfd4dc, emissive: 0x30343a });
   box(7.4, 0.5, 2.4, 0.5, 1.0, 0.5, mWhite);
-  cyl(7.4, 1.04, 2.4, 0.16, 0.12, 0.06, mGold, 12); cyl(7.4, 1.22, 2.4, 0.03, 0.03, 0.3, mGold, 8);
-  cyl(7.4, 1.5, 2.4, 0.15, 0.07, 0.3, mGold, 12);
+  cyl(7.4, 1.04, 2.4, 0.16, 0.12, 0.06, mSil, 12); cyl(7.4, 1.22, 2.4, 0.03, 0.03, 0.3, mSil, 8);
+  cyl(7.4, 1.52, 2.4, 0.15, 0.07, 0.3, mSil, 14);
+  [-1, 1].forEach(function (k) { var t = new THREE.Mesh(new THREE.TorusGeometry(0.11, 0.018, 6, 14), mSil); t.position.set(7.4 + k * 0.17, 1.52, 2.4); scene.add(t); });
   var s = new THREE.Mesh(new THREE.PlaneGeometry(0.2, 0.9), new THREE.MeshBasicMaterial({ map: stripes('madrid'), side: THREE.DoubleSide }));
   s.position.set(7.0, 1.7, 2.17); scene.add(s);
 })();
 addFrame('fotos/papa1.jpg', '', '', 6.45, 1.5, 2.17, 0, 0.9, 498 / 670);
-addFrame('fotos/papa2.jpg', '', '', 5.0, 1.55, 4.63, Math.PI, 0.9, 498 / 662);
+addFrame('fotos/papa2.jpg', '', '', 6.05, 1.8, 4.63, Math.PI, 0.9, 498 / 662);
 addFrame('fotos/papa3.jpg', '', '', 7.05, 1.55, 4.63, Math.PI, 0.9, 720 / 888);
-addFrame('fotos/papa4.jpg', '', '', 4.52, 1.5, 2.85, Math.PI / 2, 0.9, 498 / 664);
+addFrame('fotos/papa4.jpg', '', '', 5.6, 1.5, 2.17, 0, 0.9, 498 / 664);
 /* ----- cuarto de Raúl ----- */
 (function () {
   var dk = L(0x5a3320);
@@ -466,14 +480,19 @@ addFrame('fotos/papa4.jpg', '', '', 4.52, 1.5, 2.85, Math.PI / 2, 0.9, 498 / 664
   box(2.75, 1.1, 0.3, 0.45, 0.05, 0.4, dk);                                   /* flotante marrón */
   box(2.75, 1.32, 0.32, 0.3, 0.3, 0.25, L(0x2a2a30));                          /* televisor antiguo */
   [0x6a8fb8, 0xc45a3a, 0xe0c060, 0x4a7a5a].forEach(function (c, i) { box(2.62 + i * 0.07, 1.2, 0.3, 0.05, 0.22, 0.2, L(c)); });
-  box(2.3, 1.15, 2.3, 0.5, 2.3, 1.4, L(0x4a2c1c));                          /* clóset de madera oscura, cubierto por pared */
+  box(2.3, H / 2, 2.55, 0.12, H, 1.0, L(0xa9cfe6));                          /* paredita de concreto pintado frente a la puerta */
+  box(1.95, 1.0, 2.55, 0.3, 2.0, 0.8, L(0x4a2c1c));                           /* clóset pequeño de madera, detrás */
+  [1.0, 1.3].forEach(function (x) {
+    box(x, 1.3, 2.74, 0.04, 0.04, 0.4, L(0xc8201e));                            /* barras paralelas rojas */
+    var d = box(x, 1.05, 2.72, 0.03, 0.03, 0.4, L(0x3a3a3a)); d.rotation.x = 0.7;  /* soporte diagonal */
+  });
 })();
 addFrame(null, 'Foto de tu hermano', 'llegará aquí', 0.14, 1.45, 1.55, Math.PI / 2, 0.85, 0.75);
 addFrame(null, 'Su canción', 'llegará aquí', 0.14, 1.45, 2.45, Math.PI / 2, 0.85, 0.75);
 /* ----- cuarto de mamá ----- */
 (function () {
-  box(3.65, 1.05, 1.3, 1.0, 2.1, 0.1, L(0x4a2c1c));                           /* paredita-clóset */
-  box(3.65, 1.0, 1.37, 0.8, 1.5, 0.02, new THREE.MeshLambertMaterial({ color: 0x7f949f, emissive: 0x1a242a }));/* espejo de frente a la puerta */
+  box(3.65, 1.05, 1.3, 1.0, 2.1, 0.1, L(0xeeeadc));                           /* paredita-clóset */
+  box(3.65, 1.0, 1.36, 0.8, 1.7, 0.02, L(0x4a2c1c));/* espejo de frente a la puerta */
   box(5.7, 0.8, 0.8, 1.45, 0.4, 2.0, L(0xefe7d6));                             /* cama debajo de «Mamá» */
   box(5.7, 0.62, 0.7, 1.4, 0.2, 1.8, L(0xd9a0a0));
   box(7.3, 0.55, 0.45, 0.8, 0.1, 0.45, mDarkW);                                /* máquina de coser antigua */
@@ -482,8 +501,12 @@ addFrame(null, 'Su canción', 'llegará aquí', 0.14, 1.45, 2.45, Math.PI / 2, 0
   box(5.1, 0.75, 1.9, 0.8, 0.5, 0.4, L(0x2a2a30));                              /* televisor */
   box(5.85, 2.18, 1.9, 4.1, 0.06, 0.3, mTrim);                                  /* pestaña de cemento arriba */
 })();
-addFrame(null, 'Foto de Mamá', 'llegará aquí', 5.25, 1.55, 0.07, 0, 0.85, 0.75);
-addFrame(null, 'Su canción', 'llegará aquí', 6.15, 1.55, 0.07, 0, 0.85, 0.75);
+addFrame('fotos/mama1.jpg', '', '', 3.95, 1.6, 0.07, 0, 0.7, 1.091);
+addFrame('fotos/mama2.jpg', '', '', 4.7, 1.6, 0.07, 0, 0.7, 0.780);
+addFrame('fotos/mama3.jpg', '', '', 5.45, 1.6, 0.07, 0, 0.7, 0.750);
+addFrame('fotos/mama4.jpg', '', '', 6.2, 1.6, 0.07, 0, 0.7, 0.750);
+addFrame('fotos/mama5.jpg', '', '', 6.95, 1.6, 0.07, 0, 0.7, 0.750);
+addFrame('fotos/mama6.jpg', '', '', 7.5, 1.6, 0.07, 0, 0.7, 0.870);
 (function () { var b = new THREE.Mesh(new THREE.SphereGeometry(0.1, 10, 8), new THREE.MeshBasicMaterial({ color: 0xfff0c0 })); b.position.set(1.5, H - 0.12, 1.5); scene.add(b); })();
 
 /* ---------- luces ---------- */
@@ -515,7 +538,7 @@ var KF = [
   ['papa2', 5.4, 1.55, 3.3, 52, 0, 3],
   ['papa3', 5.6, 1.55, 3.4, 200, 0, 3],
   ['papa4', 5.6, 1.55, 3.4, 135, 0, 3],
-  ['papa5', 6.0, 1.55, 3.3, 255, 0, 3],
+  ['papa5', 6.0, 1.55, 3.3, 340, 0, 3],
   ['papa-out', 4.45, 1.65, 4.05, 270, 0, 3],
   ['corr2', 3.8, 1.65, 3.8, 360, 0, 1.8],
   ['bro-pre', 3.8, 1.65, 2.7, 270, 0, 1.5],
@@ -534,6 +557,7 @@ var KF = [
   ['mama2', 4.7, 1.6, 1.75, 450, 0, 2.5],
   ['mama3', 5.6, 1.6, 1.7, 365, 0, 3],
   ['mama4', 6.4, 1.6, 1.6, 402, 0, 3],
+  ['mama5', 6.0, 1.6, 1.65, 395, 0, 3],
   ['end', 5.5, 1.7, 1.7, 380, 0, 3]
 ];
 var cum = [], total = 0, idx = {};

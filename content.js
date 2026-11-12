@@ -16,7 +16,7 @@ window.WILLIAN = {
       hint: 'Desliza hacia abajo para entrar a casa'
     },
     {
-      id: 'sala', from: 'sala-in', to: 'north',
+      id: 'sala', from: 'sala-in', to: 'sala-n2',
       kicker: 'La sala',
       title: 'Pasa, Willian',
       text: 'Esta es la casa donde nos criamos. Mira alrededor y, cuando quieras, sigue por el pasillo.'
@@ -68,14 +68,46 @@ window.WILLIAN = {
       pending: true
     },
     {
-      id: 'mama', from: 'mama-door', to: 'mama4',
+      id: 'mama1', from: 'mama-door', to: 'mama2',
       kicker: 'El cuarto de Mamá',
-      title: 'Mamá',
-      text: 'Aquí llegará el mensaje de Mamá, su foto y su canción.',
-      pending: true
+      title: 'Llegaron los 40',
+      text: 'Y llegaron los 40. Qué felicidad poder haber estado ahí en estos cuarenta años, unos cerca y otros lejos, pero ahí, desde el corazón y en mis oraciones. Feliz y agradecida de poder decir: tengo un hijo de cuarenta años. Aunque no te guste ese número, es una muy buena edad, de conciencia, de cosas claras y pies sobre la tierra. Muy, pero muy feliz cumpleaños, hijo de mi vida, y feliz llegada al cuarto piso. Que sean muchos más, con salud, salud, salud y prosperidad. Un abrazo desde la distancia, te quiero un montón.',
+      sign: '— Tu mamá'
     },
     {
-      id: 'cierre', from: 'mama4', to: 'end', last: true,
+      id: 'mama2', from: 'mama2', to: 'mama3',
+      kicker: 'El cuarto de Mamá',
+      title: 'Con orgullo, desde la distancia',
+      text: 'Veo con mucho orgullo, desde la distancia, todo lo que has crecido como persona, cómo has formado una hermosa familia y, a nivel de trabajo, la distancia es solo física: el amor siempre está. Te quiero mucho, un abrazote desde la distancia, y cuando sea físico va a ser otro nivel.',
+      sign: '— Tu mamá'
+    },
+    {
+      id: 'mama3', from: 'mama3', to: 'mama4',
+      kicker: 'El cuarto de Mamá',
+      title: 'Sus fotos',
+      text: 'Las fotos, ¡ahí las fotos! Cada foto tiene una historia: un viaje a visitar a la abuela cuando eras bebé, una foto visitando tu casa, una foto de despedida, y así, recuerdos y vivencias diferentes. Son pocas porque ahora es que hay recuerdos que vienen a la mente cada vez que las veo.',
+      sign: '— Tu mamá',
+      photos: [
+        { src: 'fotos/mama1.jpg', cap: 'Foto elegida por Mamá' },
+        { src: 'fotos/mama2.jpg', cap: 'Foto elegida por Mamá' },
+        { src: 'fotos/mama3.jpg', cap: 'Foto elegida por Mamá' },
+        { src: 'fotos/mama4.jpg', cap: 'Foto elegida por Mamá' },
+        { src: 'fotos/mama5.jpg', cap: 'Foto elegida por Mamá' },
+        { src: 'fotos/mama6.jpg', cap: 'Foto elegida por Mamá' }
+      ]
+    },
+    {
+      id: 'mama4', from: 'mama4', to: 'mama5',
+      kicker: 'El cuarto de Mamá',
+      title: 'Su canción',
+      text: 'Elegí esta canción porque representa todas las emociones juntas: la alegría de saber que viene tu hijo, el miedo de saber si todo va a salir bien y, a la vez, la esperanza, y aparte la incertidumbre de pensar «¿lo haré bien o no?». Tantas cosas encierra esta canción. Con amor, desde una madre imperfecta para un hijo perfecto.',
+      sign: '— Tu mamá',
+      songs: [
+        { label: 'Canción de Mamá', url: 'https://youtu.be/jcH4hL0LVn8' }
+      ]
+    },
+    {
+      id: 'cierre', from: 'mama5', to: 'end', last: true,
       kicker: 'Con todo el amor de casa',
       title: 'Tu equipo titular',
       text: 'Willian, sabemos que son muchos años sin poder chocar las copas en la misma mesa ni darte el abrazo que tanto te debemos. Por eso quisimos que tus 40 años quedaran grabados en acero, para que cada vez que salgas de casa con tus llaves, nos lleves contigo. No importa la distancia ni el tiempo: somos tu equipo titular, tu barra incondicional y tu hogar. ¡Felices 40 años, te amamos con toda el alma!',
