@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>40 años de Willian · Un recorrido por casa</title>
+<meta name="description" content="Un regalo de Mamá, Papá y tu hermano para llevarte siempre cerca.">
+<meta name="theme-color" content="#f1b7a3">
+<style>
+:root{--salmon:#f1b7a3;--hueso:#f6f0e6;--tinta:#4a2e26;--blau:#004d98;--grana:#a50044;--celeste:#75aadb;--oro:#d9a93a}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:#f3d9c9;color:var(--tinta);font-family:Georgia,'Times New Roman',serif}
+#gl{position:fixed;inset:0;width:100%;height:100%;display:block}
+#space{width:1px}
+#loader{position:fixed;inset:0;background:var(--hueso);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;z-index:50;transition:opacity .8s}
+#loader.off{opacity:0;pointer-events:none}
+#loader b{font-size:28px;font-weight:400;letter-spacing:.04em}
+.bar3{width:120px;height:3px;background:linear-gradient(90deg,var(--grana) 0 33%,var(--blau) 33% 66%,var(--celeste) 66%)}
+#prog{position:fixed;top:0;left:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--grana),var(--blau),var(--celeste));z-index:20}
+#nav{position:fixed;top:10px;left:0;right:0;display:flex;justify-content:center;gap:6px;padding:0 10px;z-index:20;flex-wrap:wrap}
+#nav button{font:inherit;font-size:13px;letter-spacing:.03em;border:1px solid rgba(74,46,38,.25);background:rgba(246,240,230,.82);color:var(--tinta);padding:7px 13px;border-radius:999px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);cursor:pointer}
+#nav button.on{background:var(--tinta);color:var(--hueso);border-color:var(--tinta)}
+#map{position:fixed;top:52px;right:10px;width:74px;height:96px;z-index:20;background:rgba(246,240,230,.75);border-radius:10px;border:1px solid rgba(74,46,38,.2);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.card{position:fixed;left:50%;bottom:max(14px,env(safe-area-inset-bottom));width:min(560px,calc(100% - 24px));max-height:46vh;overflow:auto;transform:translate(-50%,14px);opacity:0;pointer-events:none;transition:opacity .45s,transform .45s;z-index:10;background:rgba(246,240,230,.92);border-radius:18px;padding:18px 20px 16px;box-shadow:0 8px 30px rgba(74,46,38,.25);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.card.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+.card .k{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8a5a4a;margin:0 0 4px}
+.card h2{margin:0 0 8px;font-weight:400;font-size:25px;line-height:1.15}
+.card .rule{height:2px;width:54px;margin:0 0 10px;background:linear-gradient(90deg,var(--grana) 0 33%,var(--blau) 33% 66%,var(--celeste) 66%)}
+.card p{margin:0;font-size:15.5px;line-height:1.5}
+.card .sg{margin-top:8px;font-style:italic;text-align:right}
+.card.pending p{font-style:italic;color:#7a5a4e}
+.card.center{bottom:auto;top:14vh;max-height:none;text-align:center;background:rgba(246,240,230,.82);padding:26px 22px}
+.card.center h2{font-size:clamp(30px,9vw,44px);line-height:1.1}
+.card.center .rule{margin:0 auto 12px;width:80px}
+.card .hint{margin-top:16px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#8a5a4a;animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(6px)}}
+.thumbs{display:flex;gap:8px;margin-top:12px}
+.thumbs img{flex:1;min-width:0;height:84px;object-fit:cover;border-radius:8px;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.2);cursor:pointer}
+.songs{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.songs a{display:block;text-decoration:none;text-align:center;color:var(--hueso);background:var(--blau);padding:11px 14px;border-radius:12px;font-size:15px;letter-spacing:.02em;box-shadow:0 3px 10px rgba(0,77,152,.35)}
+.songs a:nth-child(2){background:var(--grana);box-shadow:0 3px 10px rgba(165,0,68,.3)}
+.songs a:nth-child(3){background:#4a8dc4;box-shadow:0 3px 10px rgba(74,141,196,.35)}
+#lb{position:fixed;inset:0;background:rgba(20,10,8,.92);z-index:60;display:none;align-items:center;justify-content:center;flex-direction:column;padding:16px}
+#lb.on{display:flex}
+#lb img{max-width:100%;max-height:82vh;border-radius:6px}
+#lb span{color:#f6f0e6;margin-top:10px;font-size:14px}
+#nogl{display:none;position:fixed;inset:0;padding:30px;background:var(--hueso);z-index:70;text-align:center}
+</style>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<div id="prog"></div>
+<div id="nav"></div>
+<canvas id="map" width="148" height="192"></canvas>
+<div id="cards"></div>
+<div id="lb"><img alt=""><span></span></div>
+<div id="loader"><b>Willian · 40</b><div class="bar3"></div></div>
+<div id="nogl"><h2>Tu navegador no puede mostrar el recorrido en 3D</h2><p>Ábrelo desde el teléfono con Chrome o Safari actualizado.</p></div>
+<div id="space"></div>
+<script src="vendor/three.min.js"></script>
+<script src="content.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
