@@ -236,8 +236,8 @@ box(-1.3, 1.1, 1.7, 0.07, 0.05, 15.4, mRail); box(-1.3, 0.08, 1.7, 0.05, 0.05, 1
   var g = new THREE.Mesh(new THREE.PlaneGeometry(wd, hh), new THREE.MeshBasicMaterial({ color: 0xbcd9ea, transparent: true, opacity: 0.55, side: THREE.DoubleSide }));
   g.position.set(-0.02, yc, zc); g.rotation.y = Math.PI / 2; scene.add(g);
   var n = Math.round(wd / 0.12);
-  for (var k = 0; k <= n; k++) box(-0.15, yc, w[0] + k * wd / n, 0.025, hh, 0.025, mGold);
-  box(-0.15, w[2] + 0.01, zc, 0.03, 0.03, wd, mGold); box(-0.15, w[3] - 0.01, zc, 0.03, 0.03, wd, mGold); box(-0.15, yc, zc, 0.03, 0.03, wd, mGold);
+  for (var k = 0; k <= n; k++) box(-0.17, yc, w[0] + k * wd / n, 0.035, hh, 0.035, mGold);
+  box(-0.17, w[2] + 0.01, zc, 0.045, 0.045, wd, mGold); box(-0.17, w[3] - 0.01, zc, 0.045, 0.045, wd, mGold); box(-0.17, yc, zc, 0.045, 0.045, wd, mGold);
 });
 /* entorno: árboles, carros, edificio de enfrente */
 var ground = new THREE.Mesh(new THREE.PlaneGeometry(60, 60), L(0x8a8f86)); ground.rotation.x = -Math.PI / 2; ground.position.set(-22, -7.5, 4); scene.add(ground);
@@ -426,6 +426,20 @@ for (var qd = nd; qd < scene.children.length; qd++) scene.children[qd].position.
   p.position.set(3.215, 1.5, 7.45); p.rotation.y = Math.PI / 2; scene.add(p);
   box(3.195, 1.5, 7.45, 0.02, 0.5, 0.7, mDark);
 })();
+/* rincón de artesanías: casitas de pueblo colgadas en la pared sur del pasillito, antes de la sala */
+(function () {
+  var tri = new THREE.Shape(); tri.moveTo(-0.17, 0); tri.lineTo(0.17, 0); tri.lineTo(0, 0.14);
+  var roofGeo = new THREE.ExtrudeGeometry(tri, { depth: 0.07, bevelEnabled: false });
+  var mRoof = L(0xb5482c);
+  [[1.85, 1.6, 0xf2d9a0, 0.9], [2.2, 1.3, 0xd9e6c4, 0.85], [2.55, 1.62, 0xf0b9a0, 0.9], [2.9, 1.28, 0xbcd7ea, 0.85]].forEach(function (h) {
+    var g = new THREE.Group(); g.position.set(h[0], h[1], 8.97); g.rotation.y = Math.PI; g.scale.set(h[3], h[3], h[3]); scene.add(g);
+    box(0, 0, 0.02, 0.3, 0.24, 0.05, L(h[2]), g);
+    var r = new THREE.Mesh(roofGeo, mRoof); r.position.set(0, 0.12, -0.01); g.add(r);
+    box(-0.06, -0.04, 0.05, 0.08, 0.14, 0.02, mDarkW, g);
+    box(0.07, 0.02, 0.05, 0.07, 0.07, 0.02, L(0x7fb5d8), g); box(0.07, 0.02, 0.06, 0.09, 0.01, 0.01, mWhite, g); box(0.07, 0.02, 0.06, 0.01, 0.09, 0.01, mWhite, g);
+    box(0, -0.13, 0.04, 0.34, 0.02, 0.1, mWood, g);
+  });
+})();
 /* cocina blanca, apenas se asoma */
 box(0.5, 0.45, 5.2, 0.6, 0.9, 1.2, mWhite); box(0.5, 0.45, 6.6, 0.6, 0.9, 1.4, mWhite); box(0.4, 1.0, 5.2, 0.6, 2.0, 0.8, L(0xdcdcdc));
 /* lámpara de yeso en el techo de la sala */
@@ -556,6 +570,7 @@ var KF = [
   ['door-turn', -0.65, 1.65, 8.5, 90, 0, 1.5],
   ['door', 0.05, 1.65, 8.5, 90, 0, 1.2],
   ['arch', 0.9, 1.65, 8.5, 80, 0, 1.3],
+  ['artesanias', 1.4, 1.62, 8.12, 122, 0, 3],
   ['sala-in', 1.7, 1.65, 8.5, 62, 0, 1.5],
   ['alta', 3.0, 1.65, 8.45, 105, 0, 2],
   ['cuadro', 4.0, 1.6, 8.2, -48, 0, 3.5],
