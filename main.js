@@ -413,9 +413,9 @@ for (var qd = nd; qd < scene.children.length; qd++) scene.children[qd].position.
 })();
 /* pintura del atardecer: en la pared de la entrada de la cocina (cara hacia la sala) */
 (function () {
-  var p = new THREE.Mesh(new THREE.PlaneGeometry(0.55, 0.385), new THREE.MeshBasicMaterial({ map: paintingTex() }));
-  p.position.set(3.2, 1.5, 7.45); p.rotation.y = Math.PI / 2; scene.add(p);
-  box(3.19, 1.5, 7.45, 0.02, 0.45, 0.62, mDark);
+  var p = new THREE.Mesh(new THREE.PlaneGeometry(0.62, 0.434), new THREE.MeshBasicMaterial({ map: paintingTex() }));
+  p.position.set(3.215, 1.5, 7.45); p.rotation.y = Math.PI / 2; scene.add(p);
+  box(3.195, 1.5, 7.45, 0.02, 0.5, 0.7, mDark);
 })();
 /* cocina blanca, apenas se asoma */
 box(0.5, 0.45, 5.2, 0.6, 0.9, 1.2, mWhite); box(0.5, 0.45, 6.6, 0.6, 0.9, 1.4, mWhite); box(0.4, 1.0, 5.2, 0.6, 2.0, 0.8, L(0xdcdcdc));
@@ -549,7 +549,8 @@ var KF = [
   ['arch', 0.9, 1.65, 8.5, 80, 0, 1.3],
   ['sala-in', 1.7, 1.65, 8.5, 62, 0, 1.5],
   ['alta', 3.0, 1.65, 8.45, 105, 0, 2],
-  ['cuadro', 4.2, 1.6, 8.3, -50, 0, 2.8],
+  ['cuadro', 4.0, 1.6, 8.2, -48, 0, 3.5],
+  ['cuadro2', 3.85, 1.6, 8.05, -45, 0, 3.5],
   ['turn-n', 3.8, 1.65, 8.3, 0, 0, 2],
   ['sala-n', 3.8, 1.65, 6.7, 0, 0, 2],
   ['chim', 3.9, 1.65, 6.2, 72, 0, 2.5],
