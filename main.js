@@ -213,8 +213,8 @@ cp.rotation.x = Math.PI / 2; cp.position.set(-0.65, H, 3.4); scene.add(cp);
 
 /* ---------- pared exterior (pasillo de afuera, amarilla) ---------- */
 /* hueco de la reja/puerta: z 8.0 a 9.0 */
-wallX(-0.1, -6, 9.4, [[0.4, 1.6, 1.9, 2.2], [3.5, 4.3, 1.5, 2.0], [5.4, 6.9, 1.2, 2.0], [7.95, 9.05, 0, H]], mYel, mYel, 0.06);
-wallX(0.06, 0, 7.95, [[0.4, 1.6, 1.9, 2.2], [3.5, 4.3, 1.5, 2.0], [5.4, 6.9, 1.2, 2.0]], mBone, mBone, 0.12);
+wallX(-0.1, -6, 9.4, [[0.75, 2.25, 2.05, 2.35], [3.6, 4.1, 2.05, 2.35], [5.5, 7.0, 2.05, 2.35], [7.95, 9.05, 0, H]], mYel, mYel, 0.06);
+wallX(0.06, 0, 7.95, [[0.75, 2.25, 2.05, 2.35], [3.6, 4.1, 2.05, 2.35], [5.5, 7.0, 2.05, 2.35]], mBone, mBone, 0.12);
 wallZ(9.42, -1.3, 0, [], mYel, mYel, 0.1);         /* pared del fondo del pasillo (el letrero) */
 wallZ(-6, -1.3, 0, [], mYel, mYel, 0.1);
 /* puertas de vecinos */
@@ -231,7 +231,7 @@ box(-1.3, 1.1, 1.7, 0.07, 0.05, 15.4, mRail); box(-1.3, 0.08, 1.7, 0.05, 0.05, 1
   box(-0.65, 1.5, 9.375, 1.18, 0.72, 0.03, mWood);
 })();
 /* ventanas del apartamento vistas desde el pasillo: cuarto de Raúl, baño y cocina, con rejitas doradas de tubo */
-[[0.4, 1.6, 1.9, 2.2], [3.5, 4.3, 1.5, 2.0], [5.4, 6.9, 1.2, 2.0]].forEach(function (w) {
+[[0.75, 2.25, 2.05, 2.35], [3.6, 4.1, 2.05, 2.35], [5.5, 7.0, 2.05, 2.35]].forEach(function (w) {
   var zc = (w[0] + w[1]) / 2, wd = w[1] - w[0], hh = w[3] - w[2], yc = (w[2] + w[3]) / 2;
   var g = new THREE.Mesh(new THREE.PlaneGeometry(wd, hh), new THREE.MeshBasicMaterial({ color: 0xbcd9ea, transparent: true, opacity: 0.55, side: THREE.DoubleSide }));
   g.position.set(-0.02, yc, zc); g.rotation.y = Math.PI / 2; scene.add(g);
@@ -309,7 +309,7 @@ molding(3.18, 0.06, 7.64, 2.04, mTrim);
 })();
 /* ventanas: vidrio claro */
 function glass(x, y, z, w, h, rotY) { var g = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: 0xbcd9ea, transparent: true, opacity: 0.55 })); g.position.set(x, y, z); g.rotation.y = rotY; scene.add(g); }
-glass(0.125, 2.05, 1.0, 1.2, 0.3, Math.PI / 2);
+glass(0.125, 2.2, 1.5, 1.5, 0.3, Math.PI / 2);
 glass(7.6, 1.5, 3.6, 1.2, 1.15, -Math.PI / 2);
 glass(7.6, 1.5, 0.8, 1.0, 1.15, -Math.PI / 2);
 glass(7.6, 1.5, 7.4, 1.8, 1.15, -Math.PI / 2);
